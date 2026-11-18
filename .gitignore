@@ -1,0 +1,8 @@
+node_modules/
+dist/
+ALBUM/
+public/musica/audio-*.wav
+.env
+.env.*
+!.env.example
+.vercel/
