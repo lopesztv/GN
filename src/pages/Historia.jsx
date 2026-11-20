@@ -4,12 +4,13 @@ import { ArrowLeft, ImagePlus } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import { relacionamento } from '../data/relacionamento.js'
 
-function FotoAno({ src, ano, indice }) {
+function FotoAno({ src, ano, indice, parte }) {
   const [falhou, setFalhou] = useState(false)
+  const destinoCarta = parte ? `/historia/${ano}/${parte}` : `/historia/${ano}`
 
   if (!src || falhou) {
     return (
-      <Link className="year-photo__placeholder" to={`/historia/${ano}`} aria-label={`Abrir a carta de ${ano}`}>
+      <Link className="year-photo__placeholder" to={destinoCarta} aria-label={`Abrir a carta de ${ano}`}>
         <ImagePlus size={25} strokeWidth={1.4} aria-hidden="true" />
         <span>FOTO DE {ano}</span>
         <small>ABRIR CARTA E ÁUDIO ↗</small>
@@ -20,7 +21,7 @@ function FotoAno({ src, ano, indice }) {
   return (
     <Link
       className="year-photo__link"
-      to={`/historia/${ano}`}
+      to={destinoCarta}
       aria-label={`Abrir a carta de ${ano}`}
     >
       <img
@@ -60,7 +61,7 @@ export default function Historia() {
         >
           Nossa história<br /><em>ano a ano.</em>
         </motion.h1>
-        <p className="story-intro">Um espaço para as fotos de cada ano, de 2021 a 2026.</p>
+        <p className="story-intro">Seis anos de memórias, recomeços e conquistas. Cada foto guarda uma carta nossa.</p>
       </section>
 
       <section className="year-gallery" aria-label="Fotos organizadas por ano">
@@ -83,7 +84,12 @@ export default function Historia() {
               <div className="year-card__photos">
                 {fotos.map((foto, fotoIndice) => (
                   <div className="year-photo" key={`${momento.ano}-${fotoIndice}`}>
-                    <FotoAno src={foto} ano={momento.ano} indice={fotoIndice} />
+                    <FotoAno
+                      src={foto}
+                      ano={momento.ano}
+                      indice={fotoIndice}
+                      parte={momento.cartas.length > 1 ? fotoIndice + 1 : undefined}
+                    />
                   </div>
                 ))}
               </div>
@@ -93,7 +99,7 @@ export default function Historia() {
       </section>
 
       <footer className="story-footer">
-        <p>FOTOS ORGANIZADAS POR ANO <span>•</span> IMAGENS A ADICIONAR</p>
+        <p>2021—2026 <span>•</span> CADA FOTO GUARDA UMA LEMBRANÇA</p>
         <Link to="/" className="back-link"><ArrowLeft size={15} aria-hidden="true" /> Voltar ao início</Link>
       </footer>
     </main>

@@ -169,7 +169,7 @@ export default function Inicio() {
               {fotoAtual.musica ? (
                 musicaTocando ? `TOCANDO • ${fotoAtual.ano}` : `OUVIR MÚSICA • ${fotoAtual.ano}`
               ) : (
-                `MÚSICA A ADICIONAR • ${fotoAtual.ano}`
+                `MÚSICA INDISPONÍVEL • ${fotoAtual.ano}`
               )}{' '}
               <b>✦</b>
             </span>
