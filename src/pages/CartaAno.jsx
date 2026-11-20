@@ -40,7 +40,7 @@ export default function CartaAno() {
         <h1>Para você,<br /><em>com amor.</em></h1>
         <div className="letter-divider"><Heart size={16} fill="currentColor" /></div>
         <p className="letter-copy">{carta}</p>
-        <p className="letter-signoff">Com todo o meu amor,<br /><span>sempre ao seu lado.</span></p>
+        <p className="letter-signoff">Com todo meu amor pa vc munina.</p>
         <Link to="/historia" className="back-link"><ArrowLeft size={15} aria-hidden="true" /> Voltar às fotos</Link>
       </motion.article>
     </main>
