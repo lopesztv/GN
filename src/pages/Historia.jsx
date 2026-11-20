@@ -3,14 +3,18 @@ import { motion, useReducedMotion } from 'framer-motion'
 import { ArrowLeft, ImagePlus } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import { relacionamento } from '../data/relacionamento.js'
+import { tocarFaixa } from '../utils/playerMusica.js'
 
-function FotoAno({ src, ano, indice, parte }) {
+function FotoAno({ src, ano, indice, parte, musica }) {
   const [falhou, setFalhou] = useState(false)
   const destinoCarta = parte ? `/historia/${ano}/${parte}` : `/historia/${ano}`
+  const abrirCarta = () => {
+    if (musica) void tocarFaixa(musica)
+  }
 
   if (!src || falhou) {
     return (
-      <Link className="year-photo__placeholder" to={destinoCarta} aria-label={`Abrir a carta de ${ano}`}>
+      <Link className="year-photo__placeholder" to={destinoCarta} onClick={abrirCarta} aria-label={`Abrir a carta de ${ano}`}>
         <ImagePlus size={25} strokeWidth={1.4} aria-hidden="true" />
         <span>FOTO DE {ano}</span>
         <small>ABRIR CARTA E ÁUDIO ↗</small>
@@ -22,6 +26,7 @@ function FotoAno({ src, ano, indice, parte }) {
     <Link
       className="year-photo__link"
       to={destinoCarta}
+      onClick={abrirCarta}
       aria-label={`Abrir a carta de ${ano}`}
     >
       <img
@@ -89,6 +94,7 @@ export default function Historia() {
                       ano={momento.ano}
                       indice={fotoIndice}
                       parte={momento.cartas.length > 1 ? fotoIndice + 1 : undefined}
+                      musica={momento.musicas?.[fotoIndice]}
                     />
                   </div>
                 ))}
